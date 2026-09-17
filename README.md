@@ -1,40 +1,33 @@
 # Studyhall Operator
 
-The console the Studyhall team uses to run a white-label course platform where every school gets its
-own Appwrite project. Its student-facing half is
-[studyhall-classroom](https://github.com/appwrite-community/studyhall-classroom).
+The operations console for [Studyhall](https://github.com/appwrite-community/studyhall-classroom), a
+white-label course platform. Studyhall sells to schools. Each school gets an Appwrite project of its
+own, and nobody at that school ever learns Appwrite is involved.
 
-It is a [TanStack Start](https://tanstack.com/start) app rendered on the server.
+This app opens a school, ships the classroom into their project, gives them an address, meters what
+they use, and closes the account when they leave.
 
-## What it does
+## What runs where
 
-Opens a school: creates the project, registers the school's hostname, creates the tables and the
-bucket, deploys the classroom from a release tag, and points the school's address at it. After that
-it uploads course handouts and video, enrols learners, reads what each school used this month, and
-closes accounts.
+| | Credential | Reaches |
+| --- | --- | --- |
+| Studyhall's own project | A project API key | Staff accounts, and the table mapping schools to projects |
+| Every school's project | A key borrowed for one job, expiring in five minutes | Only the scopes that job needs |
+| The organization | The Partners key | Creating projects, and issuing those short-lived keys |
 
-## The credentials
+There is no long-lived credential for any customer project anywhere in this codebase. `src/lib/keys.ts`
+asks Appwrite for a key when a job starts, and the key expires on its own.
 
-One long-lived secret: a Partners key for the organization the school projects live in. It creates
-and deletes projects and cannot read or write anything inside one.
+## Reading the code
 
-Everything else runs on ephemeral project keys, requested per job with the scopes that job needs and
-expiring on their own. No credential for a customer's project is ever stored.
+- `src/lib/provision.ts` opens a school: project, key, platform, schema, site, variables, deployment, address.
+- `src/lib/schema.ts` is the shape every school gets. Note the questions table, which grants no read permission to signed-in users.
+- `src/lib/tenants.server.ts` holds the day-to-day jobs: handouts, enrolment, releases, metering, closing an account.
 
-## Running it locally
+## Running it
 
 ```bash
 npm install
-cp .env.example .env   # fill in the organization, the Partners key, and the control project
+cp .env.example .env
 npm run dev
 ```
-
-## Layout
-
-| Path | What lives there |
-| ---- | ---------------- |
-| `src/lib/clients.ts` | The organization client and the per-project client |
-| `src/lib/keys.ts` | Borrowing an ephemeral key, and the scope set for each job |
-| `src/lib/provision.ts` | Opening a school, start to finish |
-| `src/lib/schema.ts` | The tables, permissions, and bucket every school gets |
-| `src/lib/tenants.server.ts` | Handouts, enrolment, releases, usage, and closing an account |

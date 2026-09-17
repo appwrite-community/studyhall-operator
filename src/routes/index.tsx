@@ -37,7 +37,7 @@ function Schools() {
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
-          className="cursor-pointer bg-ink px-3.5 py-2 text-[13px] font-medium text-white"
+          className="cursor-pointer btn-primary px-3.5 py-2 text-[13px] font-medium"
         >
           {open ? 'Cancel' : 'Add a school'}
         </button>
@@ -104,7 +104,7 @@ function Schools() {
             <button
               type="submit"
               disabled={pending}
-              className="cursor-pointer bg-ink px-3.5 py-2 text-[13px] font-medium text-white disabled:opacity-60"
+              className="cursor-pointer btn-primary px-3.5 py-2 text-[13px] font-medium disabled:opacity-60"
             >
               {pending ? 'Opening the school' : 'Open the school'}
             </button>

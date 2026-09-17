@@ -30,6 +30,11 @@ a {
   color: inherit;
 }
 
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
 .id {
   font-family: var(--font-id);
   font-size: 11.5px;
@@ -40,6 +45,25 @@ a {
 /* One highlighter stroke, used only on the figure that matters on a screen. */
 .marked {
   background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--color-mark) 70%, transparent) 62%);
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper: #101114;
+    --color-card: #17181c;
+    --color-ink: #eceef2;
+    --color-muted: #9298a4;
+    --color-rule: #292b31;
+    --color-mark: #b99b1f;
+    --color-live: #4cae87;
+    --color-alert: #e0755c;
+  }
+
+  html {
+    background: #101114;
+    color: #eceef2;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

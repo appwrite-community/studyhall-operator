@@ -60,7 +60,7 @@ function SignIn() {
           <button
             type="submit"
             disabled={pending}
-            className="mt-6 w-full cursor-pointer bg-ink px-3.5 py-2.5 text-[13px] font-medium text-white disabled:opacity-60"
+            className="mt-6 w-full cursor-pointer btn-primary px-3.5 py-2.5 text-[13px] font-medium disabled:opacity-60"
           >
             {pending ? 'Signing in' : 'Sign in'}
           </button>

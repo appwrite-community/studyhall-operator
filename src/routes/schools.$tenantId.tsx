@@ -125,7 +125,7 @@ function School() {
               </Field>
               <button
                 type="submit"
-                className="h-[34px] cursor-pointer bg-ink px-3.5 text-[13px] font-medium text-white"
+                className="h-[34px] cursor-pointer btn-primary px-3.5 text-[13px] font-medium"
               >
                 Upload
               </button>
@@ -168,7 +168,7 @@ function School() {
               <button
                 type="submit"
                 disabled={busy === 'enrol'}
-                className="h-[34px] cursor-pointer bg-ink px-3.5 text-[13px] font-medium text-white disabled:opacity-60"
+                className="h-[34px] cursor-pointer btn-primary px-3.5 text-[13px] font-medium disabled:opacity-60"
               >
                 {busy === 'enrol' ? 'Enrolling' : 'Enrol'}
               </button>
